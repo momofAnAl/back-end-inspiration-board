@@ -1,7 +1,7 @@
 """Updated column in card table.
 
 Revision ID: 68c642d23e7c
-Revises: 38f2d9f6ba0b
+Revises: 68c642d23e7c
 Create Date: 2024-12-20 14:02:56.142451
 
 """
