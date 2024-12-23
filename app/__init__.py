@@ -4,7 +4,7 @@ import os
 from .db import db, migrate
 from .models.board import Board
 from .models.card import Card
-from .models import board_bp
+from .routes.board_routes import board_bp
 # Import models, blueprints, and anything else needed to set up the app or database
 
 
