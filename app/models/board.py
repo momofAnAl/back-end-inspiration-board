@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship 
 from ..db import db
-# from .card import Card
+
 
 # Import the Card model
 class Board(db.Model):
