@@ -23,23 +23,6 @@ def get_card(card_id):
     response_body = {"card": card.to_dict()}
     return response_body
 
-@bp.post("")
-def create_card():
-    request_body = request.get_json()
-    if "message" not in request_body:
-        response_body = {"details": "Invalid data"}
-        return make_response(response_body, 400)
-    
-    message = response_body["message"]
-    new_card = Card(message=message)
-    
-    db.session.add(new_card)
-    db.session.commit()
-    
-    response_body = {"new_card": new_card.to_dict()}
-    return response_body, 201
-    
-
 @bp.delete("/<card_id>")
 def delete_card(card_id):
     card = db.session.get(Card, card_id)
