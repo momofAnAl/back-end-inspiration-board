@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship 
 from ..db import db
-# from .card import Card
+from app.models.card import Card
+
 
 # Import the Card model
 class Board(db.Model):
@@ -16,7 +17,7 @@ class Board(db.Model):
             "title": self.title,
             "owner": self.owner,
         }
-    
+       
     # This is a class method that creates a new Board instance from a dictionary
     @classmethod 
     def from_dict(cls, board_data):
