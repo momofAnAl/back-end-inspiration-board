@@ -2,7 +2,6 @@ from flask import Blueprint, abort, make_response, request, Response
 from app.models.card import Card
 from app.db import db
 import os
-import requests
 
 bp = Blueprint("card_bp", __name__, url_prefix="/cards")
 

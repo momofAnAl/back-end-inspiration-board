@@ -21,8 +21,8 @@ def upgrade():
     with op.batch_alter_table('card', schema=None) as batch_op:
         batch_op.add_column(sa.Column('board_id', sa.Integer(), nullable=True))
         batch_op.alter_column('likes_count',
-               existing_type=sa.INTEGER(),
-               nullable=True)
+        existing_type=sa.INTEGER(),
+        nullable=True)
         batch_op.create_foreign_key(None, 'board', ['board_id'], ['id'])
 
     # ### end Alembic commands ###
@@ -33,8 +33,8 @@ def downgrade():
     with op.batch_alter_table('card', schema=None) as batch_op:
         batch_op.drop_constraint(None, type_='foreignkey')
         batch_op.alter_column('likes_count',
-               existing_type=sa.INTEGER(),
-               nullable=False)
+        existing_type=sa.INTEGER(),
+        nullable=False)
         batch_op.drop_column('board_id')
 
     # ### end Alembic commands ###
