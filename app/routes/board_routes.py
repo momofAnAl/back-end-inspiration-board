@@ -20,7 +20,8 @@ def get_board(board_id):
     
     db.session.add(board)
     db.session.commit()
-    response_body = {"board": board.to_dict()}
+    all_cards = [card.to_dict() for card in board.cards]
+    response_body = {"board": board.to_dict(), "cards": all_cards}
     
     return response_body
 
@@ -89,7 +90,7 @@ def create_card_to_board(board_id):
 @bp.get("/<board_id>/cards")
 def get_cards_for_board(board_id):
     board = validate_model(Board, board_id)
-    
+
     response_body = dict(
         id=board.id,
         title=board.title,
