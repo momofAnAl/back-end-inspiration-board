@@ -77,15 +77,9 @@ def create_card_to_board(board_id):
     db.session.add(new_card)
     db.session.commit()
     
-    cards_of_board = [card.to_dict() for card in board.cards]
-    response_body = {
-        "id": board.id,
-        "title": board.title,
-        "owner": board.owner,
-        "card_ids": cards_of_board,
-    }
+    response_body = new_card.to_dict()
     
-    return response_body
+    return response_body, 201
 
 @bp.get("/<board_id>/cards")
 def get_cards_for_board(board_id):
