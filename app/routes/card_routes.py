@@ -42,8 +42,17 @@ def update_card(card_id):
     card.message = request_body["message"]
     
     db.session.commit()
-    response_body = {"card": card.to_dict()}
+    response_body = card.to_dict()
     
     return make_response(response_body, 200)
     
+@bp.patch("/<card_id>/like")
+def like_card(card_id):
+    card = db.session.get(Card, card_id)  
+    card.likes_count = (card.likes_count or 0) + 1
     
+    db.session.commit()
+    
+    response_body = card.to_dict()
+    return make_response(response_body, 200)
+     
