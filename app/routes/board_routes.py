@@ -37,7 +37,8 @@ def create_board():
     new_board = Board(title=title, owner=owner)
     db.session.add(new_board)
     db.session.commit()
-    response_body = {"board": new_board.to_dict()}
+    
+    response_body = new_board.to_dict()
     
     return response_body,201
 
