@@ -85,11 +85,12 @@ def create_card_to_board(board_id):
 @bp.get("/<board_id>/cards")
 def get_cards_for_board(board_id):
     board = validate_model(Board, board_id)
+    cards = db.session.query(Card).filter_by(board_id=board.id).order_by(Card.id).all()
 
     response_body = dict(
         id=board.id,
         title=board.title,
         owner=board.owner,
-        cards=[card.to_dict() for card in board.cards]
+        cards=[card.to_dict() for card in cards]
     )
     return response_body    

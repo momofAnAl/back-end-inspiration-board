@@ -49,7 +49,11 @@ def update_card(card_id):
 @bp.patch("/<card_id>/like")
 def like_card(card_id):
     card = db.session.get(Card, card_id)  
-    card.likes_count = (card.likes_count or 0) + 1
+    
+    if card.likes_count:
+        card.likes_count += 1
+    else:
+        card.likes_count = 1
     
     db.session.commit()
     

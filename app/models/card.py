@@ -6,7 +6,7 @@ from typing import Optional
 class Card(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     message: Mapped[str]
-    likes_count: Mapped[int] = mapped_column(nullable=True)
+    likes_count: Mapped[int] = mapped_column(default = 0, nullable=False)
 
     # This is a foreign key column that references the id column in the board table
     board_id: Mapped[Optional[int]] = mapped_column(ForeignKey("board.id")) 
