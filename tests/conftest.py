@@ -50,11 +50,13 @@ def two_saved_cards(app, two_saved_boards):
 
     board1, board2 = two_saved_boards  
 
-    card1 = Card(board_id=board1.id, 
-                    message="You are enough, just as you are.")
+    card1 = Card(board_id=1, 
+                    message="You are enough, just as you are.",)
     
-    card2 = Card(board_id=board2.id, 
+    card2 = Card(board_id=1, 
                     message="If you're tired, rest. Don't quit.")
 
     db.session.add_all([card1, card2])
     db.session.commit()
+
+    return [card1, card2]
