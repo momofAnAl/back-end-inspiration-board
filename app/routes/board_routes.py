@@ -17,9 +17,9 @@ def get_all_saved_boards():
 @bp.get("/<board_id>")
 def get_board(board_id):
     board = db.session.get(Board, board_id)
-    
     db.session.add(board)
     db.session.commit()
+
     all_cards = [card.to_dict() for card in board.cards]
     response_body = {"board": board.to_dict(), "cards": all_cards}
     
@@ -44,17 +44,18 @@ def create_board():
 
 @bp.delete("/<board_id>")
 def delete_board(board_id):
-    board = db.session.get(Board, board_id)
-    
-    db.session.delete(board)
-    db.session.commit()
+    # board = db.session.get(Board, board_id)  
+    # db.session.delete(board)
+    # db.session.commit()
+    board = validate_model(Board, board_id)
     
     response_body = {"details": f'Board {board_id} "{board.title}" of "{board.owner}" successfully deleted.'}
     return make_response(response_body, 200)
 
 @bp.put("/<board_id>")
 def update_board(board_id):
-    board = db.session.get(Board, board_id)
+    # board = db.session.get(Board, board_id)
+    board = validate_model(Board, board_id)
 
     request_body = request.get_json()
     board.title = request_body.get("title", board.title)
@@ -68,6 +69,7 @@ def update_board(board_id):
 @bp.post("/<board_id>/cards")
 def create_card_to_board(board_id):
     board = validate_model(Board, board_id)
+    
     request_body = request.get_json()
     message = request_body["message"]
     if "message" not in request_body:
