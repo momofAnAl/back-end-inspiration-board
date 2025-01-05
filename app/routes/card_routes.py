@@ -56,10 +56,6 @@ def like_card(card_id):
         card.likes_count += 1
     else:
         card.likes_count = 1
-
-    # if card.likes_count is None:
-    #     card.likes_count = 0
-    # card.likes_count += 1
     
     db.session.commit()
     

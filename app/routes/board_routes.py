@@ -16,10 +16,9 @@ def get_all_saved_boards():
 
 @bp.get("/<board_id>")
 def get_board(board_id):
-    # board = db.session.get(Board, board_id)
-    # db.session.add(board)
-    # db.session.commit()
-    board = validate_model(Board, board_id)
+    board = db.session.get(Board, board_id)
+    db.session.add(board)
+    db.session.commit()
 
     all_cards = [card.to_dict() for card in board.cards]
     response_body = {"board": board.to_dict(), "cards": all_cards}
@@ -45,8 +44,7 @@ def create_board():
 
 @bp.delete("/<board_id>")
 def delete_board(board_id):
-    # board = db.session.get(Board, board_id)
-    
+    # board = db.session.get(Board, board_id)  
     # db.session.delete(board)
     # db.session.commit()
     board = validate_model(Board, board_id)
