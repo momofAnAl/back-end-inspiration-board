@@ -22,7 +22,7 @@ def test_create_board(client):
     assert response_body["owner"] == "New Owner"
 
 
-# @pytest.mark.skip(reason="No way to test this feature yet")
+#@pytest.mark.skip(reason="No way to test this feature yet")
 def test_get_board_by_id(client, two_saved_boards):
     response = client.get("/boards/1")
     response_body = response.get_json()
