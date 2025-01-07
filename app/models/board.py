@@ -17,7 +17,7 @@ class Board(db.Model):
             "title": self.title,
             "owner": self.owner,
         }
-       
+    
     # This is a class method that creates a new Board instance from a dictionary
     @classmethod 
     def from_dict(cls, board_data):
