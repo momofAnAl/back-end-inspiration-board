@@ -44,9 +44,6 @@ def create_board():
 
 @bp.delete("/<board_id>")
 def delete_board(board_id):
-    # board = db.session.get(Board, board_id)  
-    # db.session.delete(board)
-    # db.session.commit()
     board = validate_model(Board, board_id)
     
     response_body = {"details": f'Board {board_id} "{board.title}" of "{board.owner}" successfully deleted.'}
@@ -54,7 +51,6 @@ def delete_board(board_id):
 
 @bp.put("/<board_id>")
 def update_board(board_id):
-    # board = db.session.get(Board, board_id)
     board = validate_model(Board, board_id)
 
     request_body = request.get_json()
@@ -75,6 +71,10 @@ def create_card_to_board(board_id):
     if "message" not in request_body:
         request_body = {"details": "Card message is required"}
         return make_response(response_body, 400)
+    if len(message) > 40:
+        return make_response(({"details": "Card message must be 40 characters or less"}), 400)
+    
+
     
     new_card = Card(message=message, board=board)
     db.session.add(new_card)
