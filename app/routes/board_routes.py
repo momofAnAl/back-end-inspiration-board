@@ -75,6 +75,10 @@ def create_card_to_board(board_id):
     if "message" not in request_body:
         request_body = {"details": "Card message is required"}
         return make_response(response_body, 400)
+    if len(message) > 40:
+        return make_response(({"details": "Card message must be 40 characters or less"}), 400)
+    
+
     
     new_card = Card(message=message, board=board)
     db.session.add(new_card)
