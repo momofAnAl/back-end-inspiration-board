@@ -77,8 +77,6 @@ def create_card_to_board(board_id):
     if len(message) > 40:
         return make_response(({"details": "Card message must be 40 characters or less"}), 400)
     
-
-    
     new_card = Card(message=message, board=board)
     db.session.add(new_card)
     db.session.commit()
