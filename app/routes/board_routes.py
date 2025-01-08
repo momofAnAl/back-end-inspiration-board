@@ -46,6 +46,9 @@ def create_board():
 def delete_board(board_id):
     board = validate_model(Board, board_id)
     
+    db.session.delete(board)
+    db.session.commit()
+    
     response_body = {"details": f'Board {board_id} "{board.title}" of "{board.owner}" successfully deleted.'}
     return make_response(response_body, 200)
 
