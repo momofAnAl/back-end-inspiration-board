@@ -52,18 +52,6 @@ def delete_board(board_id):
     response_body = {"details": f'Board {board_id} "{board.title}" of "{board.owner}" successfully deleted.'}
     return make_response(response_body, 200)
 
-@bp.put("/<board_id>")
-def update_board(board_id):
-    board = validate_model(Board, board_id)
-
-    request_body = request.get_json()
-    board.title = request_body.get("title", board.title)
-    board.owner = request_body.get("owner", board.owner)
-    
-    db.session.commit()
-    
-    response_body = {"board": board.to_dict()}
-    return make_response(response_body, 200)
 
 @bp.post("/<board_id>/cards")
 def create_card_to_board(board_id):
@@ -97,3 +85,17 @@ def get_cards_for_board(board_id):
         cards=[card.to_dict() for card in cards]
     )
     return response_body    
+
+
+# @bp.put("/<board_id>")
+# def update_board(board_id):
+#     board = validate_model(Board, board_id)
+
+#     request_body = request.get_json()
+#     board.title = request_body.get("title", board.title)
+#     board.owner = request_body.get("owner", board.owner)
+    
+#     db.session.commit()
+    
+#     response_body = {"board": board.to_dict()}
+#     return make_response(response_body, 200)
